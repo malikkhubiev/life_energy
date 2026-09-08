@@ -50,7 +50,7 @@ a{color:inherit}
 
 .hero{padding:36px 20px 20px;display:flex;flex-direction:column;align-items:center;text-align:center}
 .hero-frame{width:min(640px,86vw);margin:0 auto 36px;position:relative}
-.hero-frame img{width:100%;height:auto;object-fit:contain;border-radius:2px;box-shadow:0 28px 70px rgba(40,28,16,.22)}
+.hero-frame img{width:100%;height:auto;object-fit:contain;border-radius:2px;}
 .kicker{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
 h1{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;font-size:clamp(52px,9vw,96px);line-height:.9;letter-spacing:-.04em}
 h1:after{content:"";display:block;width:48px;height:1px;background:var(--gold);margin:22px auto 0}
@@ -154,9 +154,30 @@ body.following{cursor:none}
 body.following #follow{opacity:1}
 
 .method{padding:100px 22px 40px}
-.method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1040px;margin:52px auto 0}
-.tile{background:#fff9f1;border:1px solid rgba(176,122,58,.18);padding:28px 24px 26px;text-align:center}
-.method-grid .tile:last-child{grid-column:2}
+.method-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    max-width: 1040px;
+    margin: 52px auto 0;
+}
+
+.tile {
+    width: calc((100% - 32px) / 3);
+    max-width: 320px;
+    min-width: 280px;
+    background: #fff9f1;
+    border: 1px solid rgba(176,122,58,.18);
+    padding: 28px 24px 26px;
+    text-align: center;
+}
+
+.method-grid .tile:last-child {
+    width: calc((100% - 32px) / 3);
+    max-width: 320px;
+    min-width: 280px;
+}
 .tile b{display:block;font-family:"Cormorant Garamond",serif;font-size:30px;font-weight:500;margin-bottom:12px}
 .tile p{font-size:15px;line-height:1.6;color:#4a453e}
 .method-note{max-width:600px;margin:44px auto 0;text-align:center;font-size:17px;line-height:1.7;color:var(--muted)}
@@ -164,7 +185,7 @@ body.following #follow{opacity:1}
 .author{padding:100px 22px 40px;background:linear-gradient(180deg,#efe6d8,#f4eee6)}
 .author-inner{max-width:1040px;margin:auto;display:grid;grid-template-columns:.85fr 1.15fr;gap:60px;align-items:center}
 .author-photo{position:relative}
-.author-photo img{width:100%;border-radius:2px;box-shadow:0 26px 60px rgba(40,28,16,.26)}
+.author-photo img{width:100%;border-radius:2px;}
 .author h2{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;font-size:clamp(38px,5vw,62px);line-height:.95;letter-spacing:-.04em;margin-bottom:8px}
 .author-role{font-size:17px;line-height:1.6;color:#3f3a34;margin-bottom:26px}
 .facts{margin-bottom:26px}
@@ -445,7 +466,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
   <div class="price-big">50 000 ₽</div>
   <p class="price-note">Каждое утро на автопилоте это дорого: оно забирает твою жизнь.</p>
   <a class="buy pulse js-bot" id="payCta" href="https://t.me/teacher_life_bot?start=site">Инвестируй в свою ценность</a>
-  <p class="cta-soft">В боте — короткая диагностика на 2 минуты: что именно сейчас забирает твою энергию.<br>Дальше оплата и доступ в закрытый канал.</p>
+  <p class="cta-soft">В боте — интенсивная диагностика: что именно сейчас забирает твою энергию.<br>Дальше оплата и доступ в закрытый канал.</p>
   <p class="fine">Нажимая кнопку, ты принимаешь <a href="offer.html">оферту</a> на доступ к программе<br>«Верни себе себя».</p>
 </section>
 
