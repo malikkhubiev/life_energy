@@ -226,10 +226,41 @@ body.following #follow{opacity:1}
 .cta-soft{margin-top:18px;font-size:13px;color:#8a837a;max-width:380px;margin-left:auto;margin-right:auto;line-height:1.55}
 .fine{font-size:12px;color:#8a837a;max-width:420px;margin:22px auto 0;line-height:1.5}
 
+.countdown{margin-top:22px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.countdown-label{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.countdown-row{display:flex;gap:24px;flex-wrap:wrap;justify-content:center}
+.countdown-item{display:flex;flex-direction:column;align-items:center;gap:4px}
+.countdown-item b{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;font-size:clamp(28px,4.2vw,40px);letter-spacing:-.03em;color:var(--ink);line-height:1}
+.countdown-item span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.countdown.closed .countdown-label{color:var(--ink)}
+
+.results{padding:100px 22px 40px}
+.pairs{display:flex;flex-direction:column;gap:28px;max-width:780px;margin:48px auto 0}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch}
+.shot-wrap{text-align:left}
+.shot-kicker{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.tg{background:#e7eef5;border:1px solid rgba(22,20,17,.08);border-radius:18px;overflow:hidden}
+.tg-head{background:#f6f1ea;display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid rgba(22,20,17,.07)}
+.tg-ava{width:34px;height:34px;border-radius:50%;background:#b9b2a8;filter:blur(5px);flex-shrink:0}
+.tg-meta{display:flex;flex-direction:column;gap:6px}
+.tg-name{width:86px;height:10px;border-radius:6px;background:#2a2723;opacity:.3;filter:blur(5px)}
+.tg-status{width:52px;height:6px;border-radius:6px;background:#8f887f;opacity:.4;filter:blur(3px)}
+.tg-body{padding:16px 14px 18px}
+.tg-bubble{background:#fff;border-radius:4px 16px 16px 16px;padding:12px 14px 8px;max-width:94%;font-size:15px;line-height:1.45;color:#241f1b}
+.tg-time{display:block;text-align:right;font-size:11px;color:#8e8e93;margin-top:8px;letter-spacing:.02em}
+.tg.after .tg-bubble{background:#fffdf8}
+
+.not-for{padding:100px 22px 40px;background:linear-gradient(180deg,#efe6d8,#f4eee6)}
+.not-list{max-width:640px;margin:46px auto 0;text-align:left}
+.not-list article{padding:22px 4px 22px 0;border-bottom:1px solid rgba(22,20,17,.09)}
+.not-list article:last-child{border-bottom:0}
+.not-list h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;font-size:clamp(22px,2.6vw,28px);line-height:1.2;margin-bottom:8px}
+.not-list p{font-size:16px;line-height:1.65;color:#4a453e}
+
 footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:28px 8%;font-size:13px;color:#7a746c;border-top:1px solid rgba(0,0,0,.06)}
 
 @media(max-width:860px){
-  .manifesto-inner,.cards,.method-grid,.author-inner,.dates{grid-template-columns:1fr}
+  .manifesto-inner,.cards,.method-grid,.author-inner,.dates,.pair{grid-template-columns:1fr}
   .method-grid .tile:last-child{grid-column:auto}
   .author-inner{gap:38px}
   .author-photo{max-width:420px;margin:0 auto}
@@ -277,6 +308,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
     <a class="buy js-bot" href="https://t.me/teacher_life_bot?start=site">Начать трансформацию</a>
     <p class="hero-format">14 дней: система ежедневных изменений.</p>
     <span class="deadline">Набор до 20 сентября · старт 1 октября</span>
+    <div class="countdown js-countdown" aria-live="polite"></div>
   </div>
 </section>
 
@@ -390,6 +422,66 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
   </div>
 </section>
 
+<div class="arrow"><a href="#results" aria-label="Дальше"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4v16M5 13l7 7 7-7"/></svg></a></div>
+
+<section class="results" id="results">
+  <div class="center">
+    <div class="kicker">Результаты</div>
+    <div class="emotion" data-headline="11">До и после.<br>Одним сообщением.</div>
+    <p class="fade">Переписки с клиентами.<br><b>Новая жизнь с новой ментальностью.</b></p>
+  </div>
+  <div class="pairs">
+    <div class="pair">
+      <div class="shot-wrap">
+        <div class="shot-kicker">До</div>
+        <article class="tg" aria-label="Сообщение до">
+          <div class="tg-head"><div class="tg-ava" aria-hidden="true"></div><div class="tg-meta"><div class="tg-name"></div><div class="tg-status"></div></div></div>
+          <div class="tg-body"><div class="tg-bubble">Я из очень хорошей и честной семьи — у неё есть репутация. А у меня есть проект, которым очень хочется заняться. Но подступиться страшно: а вдруг не получится справиться? Ошибиться нельзя. Этот страх высасывает из меня энергию 💔<span class="tg-time">09:14</span></div></div>
+        </article>
+      </div>
+      <div class="shot-wrap">
+        <div class="shot-kicker">После</div>
+        <article class="tg after" aria-label="Сообщение после">
+          <div class="tg-head"><div class="tg-ava" aria-hidden="true"></div><div class="tg-meta"><div class="tg-name"></div><div class="tg-status"></div></div></div>
+          <div class="tg-body"><div class="tg-bubble">Получилось🎉🎉🎉! Сначала один проект, потом следующий — и каждый сильнее прошлого 🔥💪. Сомнения есть, как Вы и говорили, но мой энтузиазм, моя энергия и мои победы - то, чем МОЯ СЕМЬЯ может гордиться ❤️!)<span class="tg-time">08:06</span></div></div>
+        </article>
+      </div>
+    </div>
+    <div class="pair">
+      <div class="shot-wrap">
+        <div class="shot-kicker">До</div>
+        <article class="tg" aria-label="Сообщение до">
+          <div class="tg-head"><div class="tg-ava" aria-hidden="true"></div><div class="tg-meta"><div class="tg-name"></div><div class="tg-status"></div></div></div>
+          <div class="tg-body"><div class="tg-bubble">Мне нужно подготовиться к международному экзамену по английскому. Но силы воли мне не хватает — соцсети меня затягивают, и я каждый день не могу оторваться 😩<span class="tg-time">23:41</span></div></div>
+        </article>
+      </div>
+      <div class="shot-wrap">
+        <div class="shot-kicker">После</div>
+        <article class="tg after" aria-label="Сообщение после">
+          <div class="tg-head"><div class="tg-ava" aria-hidden="true"></div><div class="tg-meta"><div class="tg-name"></div><div class="tg-status"></div></div></div>
+          <div class="tg-body"><div class="tg-bubble">Благодарю Вас!) Мне даже в голову не могло прийти, что мои привычки и увлечения могут работать на меня 🤯 и что мои "хотелки" могут не мешать, а наоборот — приближать меня к серьёзной цели 🚀!<span class="tg-time">21:18</span></div></div>
+        </article>
+      </div>
+    </div>
+    <div class="pair">
+      <div class="shot-wrap">
+        <div class="shot-kicker">До</div>
+        <article class="tg" aria-label="Сообщение до">
+          <div class="tg-head"><div class="tg-ava" aria-hidden="true"></div><div class="tg-meta"><div class="tg-name"></div><div class="tg-status"></div></div></div>
+          <div class="tg-body"><div class="tg-bubble">Я всё делаю ради нашего проекта. Они признавали мой вклад, но когда мне реально нужна помощь, я для них становлюсь чужой(<span class="tg-time">16:03</span></div></div>
+        </article>
+      </div>
+      <div class="shot-wrap">
+        <div class="shot-kicker">После</div>
+        <article class="tg after" aria-label="Сообщение после">
+          <div class="tg-head"><div class="tg-ava" aria-hidden="true"></div><div class="tg-meta"><div class="tg-name"></div><div class="tg-status"></div></div></div>
+          <div class="tg-body"><div class="tg-bubble">Вы были правы. Я больше не играю в обиженную девочку, расставила приоритеты, определила роли, вкладываюсь в 3 раза меньше и чувствую себя гораздо лучше. Спасибо 🙏😇<span class="tg-time">19:27</span></div></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="arrow"><a href="#program" aria-label="Дальше"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4v16M5 13l7 7 7-7"/></svg></a></div>
 
 <section class="program" id="program">
@@ -455,6 +547,38 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
   </div>
 </section>
 
+<div class="arrow"><a href="#not-for" aria-label="Дальше"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4v16M5 13l7 7 7-7"/></svg></a></div>
+
+<section class="not-for" id="not-for">
+  <div class="center">
+    <div class="kicker">Честно</div>
+    <div class="emotion" data-headline="12">Кому не подходит?</div>
+    <p class="fade">Лучше не начинать, если не готова меняться.</p>
+  </div>
+  <div class="not-list">
+    <article>
+      <h3>Если ты хочешь, чтобы сделали за тебя</h3>
+      <p>Программа не работает вместо тебя. Она возвращает тебе управление. Без твоей практики состояние не сдвигается.</p>
+    </article>
+    <article>
+      <h3>Если ты ищешь разовую мотивацию</h3>
+      <p>Здесь нет всплеска на три дня. Здесь система на каждый день — тихая, проверяемая, на 14 дней подряд.</p>
+    </article>
+    <article>
+      <h3>Если тебе нужна терапия или лечение</h3>
+      <p>Это не замена врачу и не работа с диагнозом. Мы работаем с привычным состоянием дня, не с клиническим запросом.</p>
+    </article>
+    <article>
+      <h3>Если ты пришла за космосом и вибрациями</h3>
+      <p>Мы не говорим про вселенную. Мы работаем с телом, вниманием и импульсами — так, чтобы ты могла проверить это на себе.</p>
+    </article>
+    <article>
+      <h3>Если ты не готова выделить 14 дней</h3>
+      <p>Без ежедневного возвращения в практику ничего не закрепится. Тогда это будет ещё одно «поняла, но живу как раньше».</p>
+    </article>
+  </div>
+</section>
+
 <div class="arrow"><a href="#purchase" aria-label="К доступу"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4v16M5 13l7 7 7-7"/></svg></a></div>
 
 <section class="purchase" id="purchase">
@@ -467,6 +591,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
   <div class="price-big">50 000 ₽</div>
   <p class="price-note">Каждое утро на автопилоте это дорого: оно забирает твою жизнь.</p>
   <p class="cta-soft">В боте — оплата и доступ в закрытый канал.</p>
+  <div class="countdown js-countdown" aria-live="polite"></div>
   <p class="fine">Нажимая кнопку, ты принимаешь <a href="offer.html">оферту</a> на доступ к программе<br>«Верни себе себя».</p>
 </section>
 
@@ -490,7 +615,9 @@ const HEADLINES = {
   7: "Малик Хубиев",
   8: "Как проходит трансформация",
   9: "Голос. Практика. Опыт",
-  10: "Прикоснись к себе настоящей"
+  10: "Прикоснись к себе настоящей",
+  11: "До и после. Одним сообщением",
+  12: "Кому не подходит"
 };
 
 function ymGoal(name, price){
@@ -533,6 +660,50 @@ async function openBot(e){
 }
 
 document.querySelectorAll(".js-bot").forEach(el => el.addEventListener("click", openBot));
+
+(function countdown(){
+  const DEADLINE = Date.parse("2026-09-20T23:59:59+03:00");
+  const nodes = document.querySelectorAll(".js-countdown");
+  if (!nodes.length) return;
+  const forms = {
+    day: ["день", "дня", "дней"],
+    hour: ["час", "часа", "часов"],
+    min: ["минута", "минуты", "минут"]
+  };
+  function plural(n, list){
+    const n10 = n % 10, n100 = n % 100;
+    if (n10 === 1 && n100 !== 11) return list[0];
+    if (n10 >= 2 && n10 <= 4 && (n100 < 12 || n100 > 14)) return list[1];
+    return list[2];
+  }
+  let last = "";
+  function tick(){
+    const left = DEADLINE - Date.now();
+    const stamp = left <= 0 ? "closed" : String(Math.floor(left / 60000));
+    if (stamp === last) return;
+    last = stamp;
+    nodes.forEach(el => {
+      if (left <= 0) {
+        el.classList.add("closed");
+        el.innerHTML = '<span class="countdown-label">Набор закрыт</span>';
+        return;
+      }
+      const totalMin = Math.floor(left / 60000);
+      const days = Math.floor(totalMin / (60 * 24));
+      const hours = Math.floor((totalMin % (60 * 24)) / 60);
+      const mins = totalMin % 60;
+      el.innerHTML =
+        '<span class="countdown-label">До закрытия набора</span>' +
+        '<div class="countdown-row">' +
+          '<div class="countdown-item"><b>' + days + '</b><span>' + plural(days, forms.day) + '</span></div>' +
+          '<div class="countdown-item"><b>' + hours + '</b><span>' + plural(hours, forms.hour) + '</span></div>' +
+          '<div class="countdown-item"><b>' + mins + '</b><span>' + plural(mins, forms.min) + '</span></div>' +
+        '</div>';
+    });
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
 
 document.addEventListener("yacounter" + YM + "inited", () => {
   const qs = new URLSearchParams(location.search);
