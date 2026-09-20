@@ -972,24 +972,25 @@ const behavior = (function(){
   function send(force){
     const payload = snapshot();
     const t = now();
-    if (!force && t - lastSent < 4000) return;
+    if (!force && t - lastSent < 2500) return;
     lastSent = t;
     pushMetrikaParams(payload);
     const body = JSON.stringify(payload);
     const url = api("/api/behavior");
-    try {
-      if (navigator.sendBeacon) {
-        const blob = new Blob([body], {type: "application/json"});
-        if (navigator.sendBeacon(url, blob)) return;
-      }
-    } catch {}
+    // fetch надёжнее sendBeacon(application/json) кросс-доменом (Vercel → Render)
     fetch(url, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body,
       keepalive: true,
       mode: "cors"
-    }).catch(() => {});
+    }).catch(() => {
+      try {
+        if (navigator.sendBeacon) {
+          navigator.sendBeacon(url, new Blob([body], {type: "text/plain;charset=UTF-8"}));
+        }
+      } catch {}
+    });
   }
 
   function markTelegramClick(){
@@ -1001,21 +1002,44 @@ const behavior = (function(){
   function setCid(cid){ metrikaCid = cid || ""; }
 
   if ("IntersectionObserver" in window) {
+    // Порог 0.35 ломал высокие секции (max ratio = viewport/высота < 0.35)
     const io = new IntersectionObserver(entries => {
+      let changed = false;
       entries.forEach(entry => {
         const key = entry.target.getAttribute("data-section");
         if (!key) return;
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.35) enter(key);
-        else leave(key);
+        if (entry.isIntersecting) {
+          const before = state[key] && state[key].reached;
+          enter(key);
+          if (!before) changed = true;
+        } else {
+          leave(key);
+        }
       });
-      send(false);
-    }, {threshold: [0, 0.35, 0.6]});
+      if (changed) send(true);
+      else send(false);
+    }, {threshold: [0, 0.05, 0.15, 0.35], rootMargin: "-8% 0px -18% 0px"});
     SECTIONS.forEach(s => {
       const el = document.getElementById(s.id);
       if (!el) return;
       el.setAttribute("data-section", s.key);
       io.observe(el);
     });
+  } else {
+    // Fallback: считаем доскролл по положению scroll
+    function checkScroll(){
+      const vh = window.innerHeight || 800;
+      SECTIONS.forEach(s => {
+        const el = document.getElementById(s.id);
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        if (r.top < vh * 0.75 && r.bottom > vh * 0.2) enter(s.key);
+        else leave(s.key);
+      });
+      send(false);
+    }
+    window.addEventListener("scroll", checkScroll, {passive: true});
+    checkScroll();
   }
 
   document.addEventListener("visibilitychange", () => {
@@ -1025,7 +1049,9 @@ const behavior = (function(){
     }
   });
   window.addEventListener("pagehide", () => send(true));
-  setInterval(() => send(false), 15000);
+  setInterval(() => send(false), 8000);
+  // Первый пинг сразу после загрузки
+  setTimeout(() => send(true), 800);
 
   return {markTelegramClick, setCid, send, snapshot, sid};
 })();
@@ -1036,10 +1062,11 @@ async function openBot(e){
   const cid = await getClientID();
   behavior.setCid(cid);
   behavior.markTelegramClick();
+  const snap = behavior.snapshot();
   let start = "site";
   try {
     const ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
-    const timer = ctrl ? setTimeout(() => ctrl.abort(), 1400) : null;
+    const timer = ctrl ? setTimeout(() => ctrl.abort(), 2000) : null;
     const r = await fetch(api("/api/intent"), {
       method: "POST",
       headers: {"Content-Type": "application/json"},
@@ -1048,7 +1075,9 @@ async function openBot(e){
         session_id: behavior.sid,
         ...utm,
         landing_url: location.href,
-        referrer: document.referrer
+        referrer: document.referrer,
+        page_ms: snap.page_ms,
+        sections: snap.sections
       }),
       signal: ctrl ? ctrl.signal : undefined,
       keepalive: true
