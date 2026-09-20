@@ -1,0 +1,17 @@
+/* TEAM */
+Author: Малик Хубиев
+Role: Исследователь мышления и практик изменения состояния · AI Systems Engineer
+Contact: https://t.me/teacher_life_bot
+Location: Черкесск, Карачаево-Черкесская Республика, РФ
+Legal: ИП Хубиев Малик Муссаевич · ОГРНИП 326090000002694
+
+/* SITE */
+Standards: HTML5, Schema.org JSON-LD, Open Graph, llms.txt
+Language: Russian (ru)
+Doctype: HTML5
+Last update: 2026-09-20
+
+/* SITE */
+Product: Верни себе себя — система управления состоянием
+Price: 50 000 ₽ · 20 мест
+URL: https://life-energy-phi.vercel.app/
