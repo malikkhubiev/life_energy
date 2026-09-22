@@ -2,14 +2,14 @@
 
 Статический лендинг. Экраны: герой → «тебе не нужно становиться другой» → «тобой управляет состояние» → узнавание себя → что изменится → методология → автор → результаты до/после → формат → кому не подходит → цена. На герое и в блоке оплаты — таймер до 10 октября и «Осталось 20 мест». Все кнопки (класс `js-bot`) ведут в `@teacher_life_bot` с токеном трекинга.
 
-Если сайт на Vercel, а API на Render — в коде уже стоит `LIFE_API = https://million-zcqy.onrender.com`. Переопределить можно так:
+Если сайт на Vercel, а API на Railway — после деплоя подставь URL:
 
 ```html
-<script>window.LIFE_API = "https://million-zcqy.onrender.com";</script>
+<script>window.LIFE_API = "https://xxxx.up.railway.app";</script>
 ```
 
 Лендинг: https://life-energy-phi.vercel.app/  
-API / бот: https://million-zcqy.onrender.com  
+API / бот: Railway (см. `bot-payment/RAILWAY.md`). Старый Render: https://million-zcqy.onrender.com  
 
 ## Прозрачность поведения
 
@@ -21,8 +21,8 @@ API / бот: https://million-zcqy.onrender.com
 - UTM / yclid;
 - флагом клика в Telegram и флагом `bot_started` (проставляется ботом).
 
-Дашборд (без пароля): https://million-zcqy.onrender.com/admin/behavior  
-JSON: https://million-zcqy.onrender.com/api/behavior/stats  
+Дашборд: `https://<railway>/admin/behavior`  
+JSON: `https://<railway>/api/behavior/stats`  
 
 Там avg / median / min / max, разбивка «стартовал бота / нет» и по `utm_content`.
 
