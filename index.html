@@ -560,13 +560,13 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
   <h1 data-headline="1">Верни себе<br>себя.</h1>
   <p class="sub">Перестань жить на автопилоте.<br>Верни себе энергию, спокойствие и способность <br><b>выбирать, как тебе жить</b>, — а не плыть по течению.</p>
   <div class="cta-row">
-    <div class="price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="RUB"><meta itemprop="price" content="50000"><meta itemprop="availability" content="https://schema.org/LimitedAvailability"><meta itemprop="url" content="https://t.me/teacher_life_bot?start=site"><link itemprop="seller" href="https://life-energy-phi.vercel.app/#org">50 000 ₽</div>
+    <div class="price js-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="RUB"><meta class="js-price-meta" itemprop="price" content="50000"><meta itemprop="availability" content="https://schema.org/LimitedAvailability"><meta itemprop="url" content="https://t.me/teacher_life_bot?start=site"><link itemprop="seller" href="https://life-energy-phi.vercel.app/#org"><span class="js-price-text">50 000 ₽</span></div>
     <a class="buy js-bot" href="https://t.me/teacher_life_bot?start=site">Начать трансформацию</a>
     <p class="hero-format">14 дней: система ежедневных изменений.</p>
     <span class="deadline js-dates-meta">Набор до 10 октября · старт 20 октября</span>
     <div class="countdown-wrap">
       <div class="countdown js-countdown" aria-live="polite"></div>
-      <div class="seats-left">Осталось 20 мест</div>
+      <div class="seats-left js-seats">Осталось 20 мест</div>
     </div>
   </div>
 </section>
@@ -799,14 +799,14 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
   <div class="truths">
   </div>
   <a class="buy pulse js-bot" id="payCta" href="https://t.me/teacher_life_bot?start=site">Верни себе себя</a>
-  <div class="price-big">50 000 ₽</div>
+  <div class="price-big js-price"><span class="js-price-text">50 000 ₽</span></div>
   <p class="price-note">Каждое утро на автопилоте это дорого: оно забирает твою жизнь.</p>
   <p class="cta-soft">В боте — оплата и доступ в закрытый канал.</p>
   <div class="countdown-wrap">
     <div class="countdown js-countdown" aria-live="polite"></div>
-    <div class="seats-left">Осталось 20 мест</div>
+    <div class="seats-left js-seats">Осталось 20 мест</div>
   </div>
-  <p class="fine">Нажимая кнопку, ты принимаешь <a href="offer.html">оферту</a>: доступ к материалам (группа, 20 мест, ссылка сразу) или услуги (персональный). Возврат — по оферте.</p>
+  <p class="fine">Нажимая кнопку, ты принимаешь <a href="offer.html">оферту</a>: доступ к материалам (группа, <span class="js-seats-limit">20</span> мест, ссылка сразу) или услуги (персональный). Возврат — по оферте.</p>
 </section>
 
 <footer>
@@ -818,7 +818,8 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 const YM = 112323537;
 const BOT_USER = "teacher_life_bot";
 const LIFE_API = (window.LIFE_API || "https://million.up.railway.app").replace(/\/$/, "");
-const SEATS_LEFT = 20;
+let SEATS_LEFT = 20;
+let PRICE_RUBLES = 50000;
 
 const SECTIONS = [
   {id: "top", key: "top", label: "Верни себе себя", headline: "1"},
@@ -1117,6 +1118,26 @@ document.querySelectorAll(".js-bot").forEach(el => el.addEventListener("click", 
     document.querySelectorAll(".js-date-start").forEach(el => {
       el.textContent = data.transformation_start_display || el.textContent;
     });
+    if (data.price_display) {
+      document.querySelectorAll(".js-price-text").forEach(el => {
+        el.textContent = data.price_display;
+      });
+      document.querySelectorAll(".js-price-meta").forEach(el => {
+        el.setAttribute("content", String(data.price_rubles));
+      });
+      document.querySelectorAll('meta[property="product:price:amount"]').forEach(el => {
+        el.setAttribute("content", String(data.price_rubles));
+      });
+      PRICE_RUBLES = Number(data.price_rubles) || PRICE_RUBLES;
+    }
+    if (data.seats_left != null) {
+      SEATS_LEFT = Number(data.seats_left);
+      const label = data.seats_left_label || ("Осталось " + SEATS_LEFT + " мест");
+      document.querySelectorAll(".js-seats").forEach(el => { el.textContent = label; });
+      document.querySelectorAll(".js-seats-limit").forEach(el => {
+        el.textContent = String(Math.max(SEATS_LEFT, 0));
+      });
+    }
     const metaLine = data.meta_line
       ? data.meta_line.replace(" · старт ", ", старт ")
       : "";
@@ -1132,10 +1153,17 @@ document.querySelectorAll(".js-bot").forEach(el => el.addEventListener("click", 
         nodes.forEach(node => {
           if (node["@type"] === "Product" && node.offers) {
             node.offers.priceValidUntil = data.enrollment_end_iso;
+            if (data.price_rubles != null) node.offers.price = String(data.price_rubles);
+            if (data.seats_left != null && node.offers.inventoryLevel) {
+              node.offers.inventoryLevel.value = data.seats_left;
+            }
             if (Array.isArray(node.additionalProperty)) {
               node.additionalProperty.forEach(p => {
                 if (p.name === "Набор до") p.value = data.enrollment_end_display;
                 if (p.name === "Старт публикации") p.value = data.transformation_start_display;
+                if (p.name === "Лимит набора" && data.seats_left != null) {
+                  p.value = data.seats_left + " мест";
+                }
               });
             }
           }
@@ -1192,10 +1220,6 @@ document.querySelectorAll(".js-bot").forEach(el => el.addEventListener("click", 
     .catch(() => startCountdown(fallbackDeadline));
 })();
 
-document.querySelectorAll(".seats-left").forEach(el => {
-  el.textContent = "Осталось " + SEATS_LEFT + " мест";
-});
-
 document.addEventListener("yacounter" + YM + "inited", async () => {
   const utm = qsUtm();
   const cid = await getClientID();
@@ -1230,7 +1254,7 @@ document.addEventListener("yacounter" + YM + "inited", async () => {
     window.dataLayer.push({
       ecommerce: {
         currencyCode: "RUB",
-        detail: { products: [{ id: "vs-transform", name: "Верни себе себя · 14 дней", price: 50000, quantity: 1 }] }
+        detail: { products: [{ id: "vs-transform", name: "Верни себе себя · 14 дней", price: PRICE_RUBLES, quantity: 1 }] }
       }
     });
     io.disconnect();
