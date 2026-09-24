@@ -69,7 +69,7 @@ JSON: `https://<railway>/api/behavior/stats`
 | `bot_started` | /start в боте | 150 ₽ | Telegram + запуск |
 | `show_phone` | «Показать номер» в боте | 1 000 ₽ | контакт |
 | `payment_started` | клик «Оплатить» в боте | 15 000 ₽ | сильное намерение |
-| `payment_success` | ЮKassa succeeded | 50 000 ₽ | деньги + ecommerce |
+| `payment_success` | ЮKassa succeeded | 65 000 ₽ | деньги + ecommerce |
 
 Оптимизация кампании: в итоге на `payment_success`; пока мало оплат — на `payment_started` или `show_phone`.
 

@@ -3,7 +3,7 @@
   "name_for_human": "Верни себе себя",
   "name_for_model": "verni_sebe_sebya_state_system",
   "description_for_human": "Система управления состоянием для успешных женщин. 14 дней аудио и практик.",
-  "description_for_model": "Premium digital product by Malik Khubiev: 14-day state-management system (audio, PDF anchors, practices) for affluent/successful Russian-speaking women who live on autopilot. Price 50000 RUB, max 20 seats. Buy via Telegram bot teacher_life_bot. Not medical or therapy. See https://life-energy-phi.vercel.app/llms.txt for full facts.",
+  "description_for_model": "Premium digital product by Malik Khubiev: 14-day state-management system (audio, PDF anchors, practices) for affluent/successful Russian-speaking women who live on autopilot. Price 65000 RUB, max 20 seats. Buy via Telegram bot teacher_life_bot. Not medical or therapy. See https://life-energy-phi.vercel.app/llms.txt for full facts.",
   "auth": { "type": "none" },
   "api": {
     "type": "openapi",

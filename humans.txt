@@ -13,5 +13,5 @@ Last update: 2026-09-20
 
 /* SITE */
 Product: Верни себе себя — система управления состоянием
-Price: 50 000 ₽ · 20 мест
+Price: 65 000 ₽ · 20 мест
 URL: https://life-energy-phi.vercel.app/
