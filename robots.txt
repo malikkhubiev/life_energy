@@ -1,4 +1,4 @@
-# https://life-energy-phi.vercel.app/robots.txt
+﻿# https://malik-khubiev.ru/robots.txt
 User-agent: *
 Allow: /
 Allow: /llms.txt
@@ -74,5 +74,5 @@ Allow: /
 User-agent: YouBot
 Allow: /
 
-Sitemap: https://life-energy-phi.vercel.app/sitemap.xml
-Host: https://life-energy-phi.vercel.app
+Sitemap: https://malik-khubiev.ru/sitemap.xml
+Host: https://malik-khubiev.ru

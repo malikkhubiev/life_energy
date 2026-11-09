@@ -1,10 +1,10 @@
-# Верни себе себя
+﻿# Верни себе себя
 
 > Авторская система управления состоянием Малика Хубиева. Цифровой продукт (лицензия на материалы) для успешных и состоятельных женщин, которые внешне всё имеют, но живут на автопилоте и хотят вернуть энергию, спокойствие и способность выбирать, как жить.
 
-Сайт: https://life-energy-phi.vercel.app/
+Сайт: https://malik-khubiev.ru/
 Покупка / доступ: https://t.me/teacher_life_bot?start=site
-Оферта: https://life-energy-phi.vercel.app/offer.html
+Оферта: https://malik-khubiev.ru/offer.html
 Цена группового формата: 65 000 RUB
 Лимит набора: 20 мест
 Набор до: 10 октября · Старт публикации материалов: 20 октября
@@ -64,11 +64,11 @@ AI Systems Engineer, 7+ лет в разработке и AI/ML.
 
 ## Ссылки
 
-- [Главная](https://life-energy-phi.vercel.app/): лендинг продукта
-- [Оферта](https://life-energy-phi.vercel.app/offer.html): юридические условия
+- [Главная](https://malik-khubiev.ru/): лендинг продукта
+- [Оферта](https://malik-khubiev.ru/offer.html): юридические условия
 - [Telegram-бот](https://t.me/teacher_life_bot?start=site): оплата и доступ
-- [Краткий AI-файл](https://life-energy-phi.vercel.app/ai.txt): one-page summary for agents
+- [Краткий AI-файл](https://malik-khubiev.ru/ai.txt): one-page summary for agents
 
 ## Optional
 
-- [Full product page HTML](https://life-energy-phi.vercel.app/): human-facing marketing copy (do not invent claims beyond this page and offer.html)
+- [Full product page HTML](https://malik-khubiev.ru/): human-facing marketing copy (do not invent claims beyond this page and offer.html)

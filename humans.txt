@@ -1,4 +1,4 @@
-/* TEAM */
+﻿/* TEAM */
 Author: Малик Хубиев
 Role: Исследователь мышления и практик изменения состояния · AI Systems Engineer
 Contact: https://t.me/teacher_life_bot
@@ -14,4 +14,4 @@ Last update: 2026-09-20
 /* SITE */
 Product: Верни себе себя — система управления состоянием
 Price: 65 000 ₽ · 20 мест
-URL: https://life-energy-phi.vercel.app/
+URL: https://malik-khubiev.ru/
