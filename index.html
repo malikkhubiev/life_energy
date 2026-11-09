@@ -116,7 +116,7 @@
       "@type": "Person",
       "@id": "https://malik-khubiev.ru/#person",
       "name": "Малик Хубиев",
-      "url": "https://malik-khubiev.ru/#author",
+      "url": "https://malik-khubiev.ru/",
       "image": "https://malik-khubiev.ru/img/me.webp",
       "jobTitle": "Исследователь мышления и практик изменения состояния",
       "description": "AI Systems Engineer, 7+ лет в разработке и AI/ML. Автор научной публикации. 1000+ часов преподавания и менторинга. Консультирует предпринимателей, директоров и бизнесменов.",
@@ -451,18 +451,6 @@ body.following #follow{opacity:1}
 .tile p{font-size:15px;line-height:1.6;color:#4a453e}
 .method-note{max-width:600px;margin:44px auto 0;text-align:center;font-size:17px;line-height:1.7;color:var(--muted)}
 
-.author{padding:100px 22px 40px;background:linear-gradient(180deg,#efe6d8,#f4eee6)}
-.author-inner{max-width:1040px;margin:auto;display:grid;grid-template-columns:.85fr 1.15fr;gap:60px;align-items:center}
-.author-photo{position:relative;}
-.author-photo img{width:100%;border-radius:2px;}
-.author h2{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;font-size:clamp(38px,5vw,62px);line-height:.95;letter-spacing:-.04em;margin-bottom:8px}
-.author-role{font-size:17px;line-height:1.6;color:#3f3a34;margin-bottom:26px}
-.facts{margin-bottom:26px}
-.facts p{font-size:15px;line-height:1.6;color:#4a453e;padding:11px 0 11px 26px;border-bottom:1px solid rgba(22,20,17,.09);position:relative}
-.facts p:before{content:"";position:absolute;left:0;top:20px;width:9px;height:1px;background:var(--gold)}
-.facts p:last-child{border-bottom:0}
-.author-quote{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:clamp(20px,2.6vw,26px);line-height:1.4;color:var(--ink);border-left:1px solid var(--gold);padding-left:22px}
-
 .inside{padding:100px 22px 40px}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:980px;margin:48px auto 0}
 .card{background:#fff9f1;padding:28px 22px;text-align:center;border:1px solid rgba(176,122,58,.18)}
@@ -545,10 +533,8 @@ body.following #follow{opacity:1}
 footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:28px 8%;font-size:13px;color:#7a746c;border-top:1px solid rgba(0,0,0,.06)}
 
 @media(max-width:860px){
-  .manifesto-inner,.cards,.method-grid,.author-inner,.dates,.pair{grid-template-columns:1fr}
+  .manifesto-inner,.cards,.method-grid,.dates,.pair{grid-template-columns:1fr}
   .method-grid .tile:last-child{grid-column:auto}
-  .author-inner{gap:38px}
-  .author-photo{max-width:420px;margin:0 auto}
   .mosaic{
     height:460vw;
     margin-top:56px;
@@ -687,27 +673,6 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
     <div class="tile"><b>Эмоции</b><p>Тревога, раздражение, подавленность, качели.<br>Ты учишься чувствовать их в теле, не отдаваясь им.</p></div>
     <div class="tile"><b>Тело</b><p>Ты возвращаешься в тело и снова чувствуешь себя:<br>замечаешь тепло, расслабление, желание и удовольствие.</p></div>
     <div class="tile"><b>Сознание</b><p>Ты перестаёшь быть заложницей собственных мыслей.<br>Ты строишь стратегии и сама решаешь, что делать дальше.</p></div>
-  </div>
-</section>
-
-<div class="arrow"><a href="#author" aria-label="Дальше"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4v16M5 13l7 7 7-7"/></svg></a></div>
-
-<section class="author" id="author" itemscope itemtype="https://schema.org/Person">
-  <div class="author-inner">
-    <div class="author-photo"><img src="img/me.webp" alt="Малик Хубиев — автор системы Верни себе себя" itemprop="image" loading="lazy" decoding="async" width="520"></div>
-    <div>
-      <div class="kicker">Автор</div>
-      <h2 data-headline="7" itemprop="name">Малик Хубиев</h2>
-      <p class="author-role" itemprop="jobTitle">Исследователь мышления и практик изменения состояния.</p>
-      <div class="facts">
-        <p>7+ лет в разработке и AI/ML. AI Systems Engineer.</p>
-        <p>Автор научной публикации и метрики математической статистики.</p>
-        <p>1000+ часов преподавания и менторинга.</p>
-        <p>Консультирую предпринимателей, директоров и бизнесменов.</p>
-        <p>Изучаю психологию мышления, формирование понятий и причинно-следственные связи.</p>
-      </div>
-      <p class="author-quote">Моя задача — не убедить тебя поверить.<br>А помочь тебе увидеть, проверить и изменить жизнь, которую ты чувствуешь каждый день.</p>
-    </div>
   </div>
 </section>
 
@@ -894,7 +859,6 @@ const SECTIONS = [
   {id: "recognize", key: "recognize", label: "Ты узнаешь себя?", headline: "4"},
   {id: "manifesto", key: "manifesto", label: "Когда ты управляешь состоянием", headline: "5"},
   {id: "method", key: "method", label: "Управление состоянием", headline: "6"},
-  {id: "author", key: "author", label: "Малик Хубиев", headline: "7"},
   {id: "results", key: "results", label: "До и после", headline: "11"},
   {id: "inside", key: "inside", label: "Голос. Практика. Опыт", headline: "9"},
   {id: "friday", key: "friday", label: "Пятничный отчёт", headline: "13"},
