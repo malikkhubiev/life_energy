@@ -454,23 +454,23 @@ h1:after{content:"";display:block;width:56px;height:1px;background:linear-gradie
 
 /* ---------- 7 дней: карта дней ---------- */
 .swipe-hint{display:none;margin:30px auto 0;text-align:center;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
-.daymap{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;align-items:start;max-width:1160px;margin:54px auto 0}
-.dcard{background:#fff;border:1px solid rgba(176,122,58,.2);border-radius:var(--r);overflow:hidden;box-shadow:0 10px 28px rgba(22,20,17,.05);transition:transform .45s var(--ease),box-shadow .45s,border-color .45s}
+.daymap{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;align-items:stretch;max-width:1160px;margin:54px auto 0}
+.dcard{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid rgba(176,122,58,.2);border-radius:var(--r);overflow:hidden;box-shadow:0 10px 28px rgba(22,20,17,.05);transition:transform .45s var(--ease),box-shadow .45s,border-color .45s}
 .dcard:hover{transform:translateY(-6px);box-shadow:0 22px 48px rgba(22,20,17,.12);border-color:var(--line-strong)}
 .dcard.open{border-color:var(--gold)}
-.dbtn{display:block;width:100%;text-align:left;background:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.dbtn{display:flex;flex-direction:column;flex:1 1 auto;width:100%;text-align:left;background:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .dbtn:focus-visible{outline:3px solid rgba(176,122,58,.5);outline-offset:-3px}
-.dimg{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;background:var(--bg-soft)}
+.dimg{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;background:var(--bg-soft);flex:0 0 auto}
 .dimg img{width:100%;height:100%;object-fit:cover;object-position:center 20%;transition:transform 1.4s var(--ease)}
 .dcard:hover .dimg img,.dcard.open .dimg img{transform:scale(1.08)}
 .dimg:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(22,20,17,.45) 100%);pointer-events:none}
 .dnum{position:absolute;left:16px;bottom:8px;z-index:2;display:flex;align-items:baseline;gap:8px}
 .dnum small{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#e8c48a;font-weight:600;text-shadow:0 1px 8px rgba(22,20,17,.4)}
 .dnum span{font-family:"Cormorant Garamond",serif;font-size:54px;line-height:.9;font-weight:500;color:#fffdf8;text-shadow:0 2px 14px rgba(22,20,17,.45)}
-.dtxt{display:block;padding:14px 20px 8px}
-.dtxt h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;font-size:clamp(25px,2.3vw,30px);line-height:1.05;letter-spacing:-.02em;margin-bottom:10px;color:var(--ink)}
-.dtxt .lead-b{display:block;font-size:14.5px;line-height:1.55;font-weight:500;color:#3f3a34}
-.dtoggle{display:flex;align-items:center;justify-content:space-between;padding:12px 20px 18px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.dtxt{display:flex;flex-direction:column;flex:1 1 auto;padding:14px 20px 8px}
+.dtxt h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;font-size:clamp(25px,2.3vw,30px);line-height:1.05;letter-spacing:-.02em;margin-bottom:10px;color:var(--ink);min-height:1.1em}
+.dtxt .lead-b{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden;font-size:14.5px;line-height:1.55;font-weight:500;color:#3f3a34;min-height:calc(1.55em * 4)}
+.dtoggle{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding:12px 20px 18px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:600}
 .dtoggle i{position:relative;width:28px;height:28px;border-radius:50%;border:1px solid var(--line-strong);transition:transform .5s var(--ease),background .3s}
 .dtoggle i:before,.dtoggle i:after{content:"";position:absolute;left:50%;top:50%;width:11px;height:1px;background:var(--gold);transform:translate(-50%,-50%)}
 .dtoggle i:after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .5s var(--ease)}
@@ -675,7 +675,7 @@ footer a{text-decoration:underline;text-underline-offset:3px;color:#6a635a}
       <span class="hero-orb o2" aria-hidden="true"><img src="img/orb-2.webp" alt="" width="400" height="600" loading="lazy" decoding="async"></span>
     </figure>
 
-    <p class="hero-text" data-in style="--d:5">Семь дней индивидуальной работы, чтобы разобраться, что мешает тебе жить так, как хочется, и научиться лучше понимать себя.</p>
+    <p class="hero-text" data-in style="--d:5">Семь дней <b>индивидуальной работы</b>, чтобы разобраться, что мешает тебе жить так, как <b>хочется</b>, и научиться <b>лучше понимать себя</b>.</p>
 
     <ul class="facts" data-in style="--d:6">
       <li><b>7</b>занятий один на один</li>
@@ -685,7 +685,7 @@ footer a{text-decoration:underline;text-underline-offset:3px;color:#6a635a}
       <li><b class="js-price-text">65 000 ₽</b>программа</li>
     </ul>
     <div class="cta-row" data-in style="--d:7">
-      <a class="buy pulse js-bot" href="https://t.me/teacher_life_bot?start=site">Обсудить участие</a>
+      <a class="buy pulse js-bot" href="https://t.me/teacher_life_bot?start=site">Получить персональный разбор</a>
       <p class="hero-note">Индивидуальная программа. Количество мест ограничено временем, которое я могу уделить участницам лично.</p>
     </div>
   </div>
@@ -695,7 +695,7 @@ footer a{text-decoration:underline;text-underline-offset:3px;color:#6a635a}
 <section class="section" id="problem">
   <div class="reveal center">
     <div class="kicker">О чём это</div>
-    <h2 class="emotion" data-headline="2">Ты можешь многое успевать — и при этом не чувствовать, что живёшь своей жизнью</h2>
+    <h2 class="emotion" data-headline="2">Ты можешь многое успевать — и при этом не чувствовать, что живёшь <b>своей жизнью</b></h2>
     <p class="lede">Внешне у тебя может быть всё хорошо: ты работаешь, занимаешься собой, строишь планы. У тебя есть цели и возможности.<br><b>Но внутри может оставаться ощущение, что что-то не так.</b></p>
   </div>
   <div class="reveal stagger feel-cards">
@@ -830,7 +830,7 @@ footer a{text-decoration:underline;text-underline-offset:3px;color:#6a635a}
     <article class="dcard">
       <button type="button" class="dbtn" aria-expanded="false">
         <span class="dimg"><img src="img/day-1.webp" alt="" width="400" height="600" loading="lazy" decoding="async"><span class="dnum"><small>День</small><span>1</span></span></span>
-        <span class="dtxt"><h3>Лень или интуиция</h3><span class="lead-b">Разберёмся, чего ты действительно хочешь и что мешает тебе двигаться к этому.</span></span>
+        <span class="dtxt"><h3>Желание</h3><span class="lead-b">Разберёмся, чего ты действительно хочешь и что мешает тебе двигаться к этому.</span></span>
         <span class="dtoggle">Подробнее<i></i></span>
       </button>
       <div class="dmore"><div>
@@ -841,7 +841,7 @@ footer a{text-decoration:underline;text-underline-offset:3px;color:#6a635a}
     <article class="dcard">
       <button type="button" class="dbtn" aria-expanded="false">
         <span class="dimg"><img src="img/day-2.webp" alt="" width="400" height="600" loading="lazy" decoding="async"><span class="dnum"><small>День</small><span>2</span></span></span>
-        <span class="dtxt"><h3>Как выполнять работу</h3><span class="lead-b">Научишься организовывать действия так, чтобы результат не требовал постоянной борьбы с собой.</span></span>
+        <span class="dtxt"><h3>Действие</h3><span class="lead-b">Научишься организовывать действия так, чтобы результат не требовал постоянной борьбы с собой.</span></span>
         <span class="dtoggle">Подробнее<i></i></span>
       </button>
       <div class="dmore"><div>
@@ -863,7 +863,7 @@ footer a{text-decoration:underline;text-underline-offset:3px;color:#6a635a}
     <article class="dcard">
       <button type="button" class="dbtn" aria-expanded="false">
         <span class="dimg"><img src="img/day-4.webp" alt="" width="400" height="600" loading="lazy" decoding="async"><span class="dnum"><small>День</small><span>4</span></span></span>
-        <span class="dtxt"><h3>Управление стрессом</h3><span class="lead-b">Научишься иначе относиться к мыслям, переживаниям и сложным ситуациям.</span></span>
+        <span class="dtxt"><h3>Стресс</h3><span class="lead-b">Научишься иначе относиться к мыслям, переживаниям и сложным ситуациям.</span></span>
         <span class="dtoggle">Подробнее<i></i></span>
       </button>
       <div class="dmore"><div>
@@ -885,7 +885,7 @@ footer a{text-decoration:underline;text-underline-offset:3px;color:#6a635a}
     <article class="dcard">
       <button type="button" class="dbtn" aria-expanded="false">
         <span class="dimg"><img src="img/day-6.webp" alt="" width="400" height="600" loading="lazy" decoding="async"><span class="dnum"><small>День</small><span>6</span></span></span>
-        <span class="dtxt"><h3>Развитие чувствительности</h3><span class="lead-b">Научишься внимательнее замечать собственные ощущения и получать больше удовольствия от повседневной жизни.</span></span>
+        <span class="dtxt"><h3>Чувствительность</h3><span class="lead-b">Научишься внимательнее замечать собственные ощущения и получать больше удовольствия от повседневной жизни.</span></span>
         <span class="dtoggle">Подробнее<i></i></span>
       </button>
       <div class="dmore"><div>
@@ -896,7 +896,7 @@ footer a{text-decoration:underline;text-underline-offset:3px;color:#6a635a}
     <article class="dcard">
       <button type="button" class="dbtn" aria-expanded="false">
         <span class="dimg"><img src="img/day-7.webp" alt="" width="400" height="400" loading="lazy" decoding="async"><span class="dnum"><small>День</small><span>7</span></span></span>
-        <span class="dtxt"><h3>Самооценка и собственные ценности</h3><span class="lead-b">Научишься лучше понимать себя, свои способности, ресурсы и то, на что действительно хочешь опираться в жизни.</span></span>
+        <span class="dtxt"><h3>Авторство</h3><span class="lead-b">Научишься лучше понимать себя, свои способности, ресурсы и то, на что действительно хочешь опираться в жизни.</span></span>
         <span class="dtoggle">Подробнее<i></i></span>
       </button>
       <div class="dmore"><div>
@@ -1062,7 +1062,7 @@ footer a{text-decoration:underline;text-underline-offset:3px;color:#6a635a}
     <li>Разбор твоих ситуаций и задач.</li>
     <li>Практические упражнения и применение знаний.</li>
   </ul>
-  <a class="buy pulse js-bot" id="payCta" href="https://t.me/teacher_life_bot?start=site">Обсудить участие в программе</a>
+  <a class="buy pulse js-bot" id="payCta" href="https://t.me/teacher_life_bot?start=site">Получить персональный разбор в программе</a>
   <p class="cta-soft">Перед началом мы обсудим твой запрос и определим, подходит ли тебе программа.</p>
 </section>
 
@@ -1140,7 +1140,7 @@ footer a{text-decoration:underline;text-underline-offset:3px;color:#6a635a}
     <p><b>А для того, чтобы тебе стало легче быть собой и жить так, как действительно хочется.</b></p>
   </div>
   <p class="closing">Больше энергии. Больше спокойствия. Настоящее удовольствие от собственной жизни.</p>
-  <a class="buy js-bot" href="https://t.me/teacher_life_bot?start=site">Обсудить участие</a>
+  <a class="buy js-bot" href="https://t.me/teacher_life_bot?start=site">Получить персональный разбор</a>
 </section>
 
 <!-- 14. FAQ -->

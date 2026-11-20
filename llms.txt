@@ -3,7 +3,7 @@
 > Индивидуальная 7-дневная программа Малика Хубиева: семь видеозанятий один на один по 90 минут через Яндекс Телемост. Для женщин, которые хотят чувствовать себя энергичнее и спокойнее, лучше понимать себя, увереннее управлять своими действиями и получать больше удовольствия от жизни.
 
 Сайт: https://malik-khubiev.ru/
-Обсудить участие: https://t.me/teacher_life_bot?start=site
+Получить персональный разбор: https://t.me/teacher_life_bot?start=site
 Оферта: https://malik-khubiev.ru/offer.html
 Стоимость: 65 000 RUB за всю программу
 Формат: 7 индивидуальных занятий по 90 минут (10,5 часов личной работы), камера включена
@@ -60,7 +60,7 @@
 
 - [Главная](https://malik-khubiev.ru/): страница программы
 - [Оферта](https://malik-khubiev.ru/offer.html): юридические условия
-- [Telegram-бот](https://t.me/teacher_life_bot?start=site): обсудить участие
+- [Telegram-бот](https://t.me/teacher_life_bot?start=site): Получить персональный разбор
 - [Краткий AI-файл](https://malik-khubiev.ru/ai.txt): one-page summary for agents
 
 ## Optional
