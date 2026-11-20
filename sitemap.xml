@@ -1,32 +1,32 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://malik-khubiev.ru/</loc>
-    <lastmod>2026-09-20</lastmod>
-    <changefreq>daily</changefreq>
+    <lastmod>2026-11-18</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="ru" href="https://malik-khubiev.ru/"/>
     <image:image>
       <image:loc>https://malik-khubiev.ru/img/hero.webp</image:loc>
-      <image:title>Верни себе себя — система управления состоянием</image:title>
-      <image:caption>Авторская система Малика Хубиева для успешных женщин</image:caption>
+      <image:title>Верни себе себя — индивидуальная программа за 7 дней</image:title>
+      <image:caption>Индивидуальная программа Малика Хубиева: семь видеозанятий по 90 минут</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://malik-khubiev.ru/img/me.webp</image:loc>
-      <image:title>Малик Хубиев</image:title>
+      <image:title>Малик Хубиев — автор и ведущий программы «Верни себе себя»</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://malik-khubiev.ru/offer.html</loc>
-    <lastmod>2026-09-20</lastmod>
+    <lastmod>2026-11-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://malik-khubiev.ru/llms.txt</loc>
-    <lastmod>2026-09-20</lastmod>
+    <lastmod>2026-11-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

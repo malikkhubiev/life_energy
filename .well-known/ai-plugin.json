@@ -1,9 +1,9 @@
-﻿{
+{
   "schema_version": "v1",
   "name_for_human": "Верни себе себя",
-  "name_for_model": "verni_sebe_sebya_state_system",
-  "description_for_human": "Система управления состоянием для успешных женщин. 14 дней аудио и практик.",
-  "description_for_model": "Premium digital product by Malik Khubiev: 14-day state-management system (audio, PDF anchors, practices) for affluent/successful Russian-speaking women who live on autopilot. Price 65000 RUB, max 20 seats. Buy via Telegram bot teacher_life_bot. Not medical or therapy. See https://malik-khubiev.ru/llms.txt for full facts.",
+  "name_for_model": "verni_sebe_sebya_individual_program",
+  "description_for_human": "Индивидуальная программа на 7 дней: семь видеозанятий по 90 минут с Маликом Хубиевым.",
+  "description_for_model": "Individual 7-day program by Malik Khubiev: seven one-on-one 90-minute video sessions via Yandex Telemost for women who want more energy, calm and self-understanding. Price 65000 RUB. Discuss participation via Telegram bot teacher_life_bot. Not medical or therapy. See https://malik-khubiev.ru/llms.txt for full facts.",
   "auth": { "type": "none" },
   "api": {
     "type": "openapi",

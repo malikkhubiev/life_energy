@@ -1,6 +1,6 @@
-﻿/* TEAM */
+/* TEAM */
 Author: Малик Хубиев
-Role: Исследователь мышления и практик изменения состояния · AI Systems Engineer
+Role: Исследователь мышления и поведения
 Contact: https://t.me/teacher_life_bot
 Location: Черкесск, Карачаево-Черкесская Республика, РФ
 Legal: ИП Хубиев Малик Муссаевич · ОГРНИП 326090000002694
@@ -9,9 +9,10 @@ Legal: ИП Хубиев Малик Муссаевич · ОГРНИП 326090000
 Standards: HTML5, Schema.org JSON-LD, Open Graph, llms.txt
 Language: Russian (ru)
 Doctype: HTML5
-Last update: 2026-09-20
+Last update: 2026-11-18
 
 /* SITE */
-Product: Верни себе себя — система управления состоянием
-Price: 65 000 ₽ · 20 мест
+Product: Верни себе себя — индивидуальная программа за 7 дней
+Format: 7 индивидуальных видеозанятий по 90 минут · Яндекс Телемост
+Price: 65 000 ₽
 URL: https://malik-khubiev.ru/
