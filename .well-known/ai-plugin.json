@@ -2,12 +2,12 @@
   "schema_version": "v1",
   "name_for_human": "Верни себе себя",
   "name_for_model": "verni_sebe_sebya_individual_program",
-  "description_for_human": "Индивидуальная программа на 7 дней: семь видеозанятий по 90 минут с Маликом Хубиевым.",
-  "description_for_model": "Individual 7-day program by Malik Khubiev: seven one-on-one 90-minute video sessions via Yandex Telemost for women who want more energy, calm and self-understanding. Price 65000 RUB. Discuss participation via Telegram bot teacher_life_bot. Not medical or therapy. See https://malik-khubiev.ru/llms.txt for full facts.",
+  "description_for_human": "Бесплатная диагностическая встреча и индивидуальная программа на 7 дней с Маликом Хубиевым.",
+  "description_for_model": "Start with a free ~60-minute diagnostic meeting, then optional paid 7-day one-on-one program (7×90 min via Yandex Telemost) by Malik Khubiev. Price 65000 RUB. Topics: Desire, Action, Biology, Stress, Environment, Sensitivity, Authorship. Book via Telegram bot teacher_life_bot. Not medical or therapy. Use getProgram, getPricing, getContact. Full facts: https://malik-khubiev.ru/llms.txt",
   "auth": { "type": "none" },
   "api": {
     "type": "openapi",
-    "url": "https://malik-khubiev.ru/ai.txt"
+    "url": "https://malik-khubiev.ru/openapi.yaml"
   },
   "logo_url": "https://malik-khubiev.ru/img/fav/web-app-manifest-512x512.png",
   "contact_email": "via-telegram@teacher_life_bot",

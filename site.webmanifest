@@ -2,7 +2,7 @@
   "id": "/",
   "name": "Верни себе себя",
   "short_name": "Верни себя",
-  "description": "Индивидуальная программа на 7 дней: семь видеозанятий по 90 минут с Маликом Хубиевым. Больше энергии, спокойствия и удовольствия от жизни.",
+  "description": "Бесплатная личная диагностическая встреча и индивидуальная программа на 7 дней с Маликом Хубиевым.",
   "lang": "ru-RU",
   "dir": "ltr",
   "start_url": "/",
@@ -11,7 +11,7 @@
   "orientation": "portrait-primary",
   "theme_color": "#f7f4ef",
   "background_color": "#f7f4ef",
-  "categories": ["lifestyle", "health", "education"],
+  "categories": ["education", "lifestyle"],
   "icons": [
     {
       "src": "/img/fav/web-app-manifest-192x192.png",

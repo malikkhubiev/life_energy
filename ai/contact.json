@@ -1,0 +1,12 @@
+{
+  "telegram_bot": "teacher_life_bot",
+  "start_param": "site",
+  "url": "https://t.me/teacher_life_bot?start=site",
+  "primary_cta": "Записаться на бесплатную личную диагностическую встречу",
+  "site_url": "https://malik-khubiev.ru/",
+  "meeting_url": "https://malik-khubiev.ru/vstrecha.html",
+  "program_url": "https://malik-khubiev.ru/programma.html",
+  "offer_url": "https://malik-khubiev.ru/offer.html",
+  "legal_entity": "ИП Хубиев Малик Муссаевич · ОГРНИП 326090000002694",
+  "note": "Primary path: book the free diagnostic meeting via the bot. Do not invent other booking or payment channels. Program payment is via YuKassa link from the bot after discussion."
+}

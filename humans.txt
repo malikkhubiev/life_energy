@@ -1,18 +1,20 @@
 /* TEAM */
 Author: Малик Хубиев
 Role: Исследователь мышления и поведения
-Contact: https://t.me/teacher_life_bot
+Contact: https://t.me/teacher_life_bot?start=site
 Location: Черкесск, Карачаево-Черкесская Республика, РФ
 Legal: ИП Хубиев Малик Муссаевич · ОГРНИП 326090000002694
 
 /* SITE */
-Standards: HTML5, Schema.org JSON-LD, Open Graph, llms.txt
+Standards: HTML5, Schema.org JSON-LD, Open Graph, llms.txt, OpenAPI
 Language: Russian (ru)
 Doctype: HTML5
-Last update: 2026-11-18
+Last update: 2026-11-23
 
-/* SITE */
+/* PRODUCT */
+Entry: Бесплатная личная диагностическая встреча (~60 мин)
 Product: Верни себе себя — индивидуальная программа за 7 дней
 Format: 7 индивидуальных видеозанятий по 90 минут · Яндекс Телемост
+Topics: Желание, Действие, Биология, Стресс, Окружение, Чувствительность, Авторство
 Price: 65 000 ₽
 URL: https://malik-khubiev.ru/
