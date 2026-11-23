@@ -1,9 +1,11 @@
-﻿const YM = 112323537;
+﻿const YM = 114593555;
 const BOT_USER = "teacher_life_bot";
-const LIFE_API = (window.LIFE_API || "https://million.up.railway.app").replace(/\/$/, "");
+// Прод: задайте window.LIFE_API = "https://ваш-vps-домен" до подключения этого файла.
+const LIFE_API = (window.LIFE_API || "http://127.0.0.1:8000").replace(/\/$/, "");
 let PRICE_RUBLES = 65000;
 
 const SECTIONS = Array.isArray(window.PAGE_SECTIONS) ? window.PAGE_SECTIONS : [];
+const PAGE_LANDING = window.PAGE_LANDING || "home";
 
 function api(path){
   return LIFE_API ? LIFE_API + path : path;
@@ -55,10 +57,25 @@ const behavior = (function(){
   SECTIONS.forEach(s => {
     state[s.key] = {reached: false, time_to_ms: null, dwell_ms: 0, _since: null};
   });
+  // Виртуальные ключи: page_* и flip_*
+  const extra = {};
   let clickedTelegram = false;
-  let botStarted = false;
   let lastSent = 0;
   let metrikaCid = "";
+
+  function ensureExtra(key, label){
+    if (!extra[key]) extra[key] = {reached: false, time_to_ms: null, dwell_ms: 0, label: label || key};
+    return extra[key];
+  }
+
+  function markExtra(key, label){
+    const row = ensureExtra(key, label);
+    if (!row.reached) {
+      row.reached = true;
+      row.time_to_ms = Math.max(0, Date.now() - startedAt);
+      send(true);
+    }
+  }
 
   function now(){ return Date.now(); }
 
@@ -79,14 +96,6 @@ const behavior = (function(){
     if (!row.reached) {
       row.reached = true;
       row.time_to_ms = Math.max(0, t - startedAt);
-      const sec = SECTIONS.find(s => s.key === key);
-      if (sec && sec.headline) {
-        ymGoal("headline_" + sec.headline);
-        if (typeof ym === "function") {
-          ym(YM, "params", {headline_reached: sec.headline, headline_title: sec.label, section_key: key});
-        }
-      }
-      ymGoal("section_" + key);
     }
     if (row._since == null) row._since = t;
   }
@@ -100,44 +109,38 @@ const behavior = (function(){
 
   function snapshot(){
     const t = now();
+    const sections = SECTIONS.map(s => {
+      const row = state[s.key];
+      const live = row._since != null ? Math.max(0, t - row._since) : 0;
+      return {
+        key: s.key,
+        label: s.label,
+        reached: row.reached ? 1 : 0,
+        time_to_ms: row.time_to_ms,
+        dwell_ms: Math.round(row.dwell_ms + live)
+      };
+    });
+    Object.keys(extra).forEach(key => {
+      const row = extra[key];
+      sections.push({
+        key,
+        label: row.label,
+        reached: row.reached ? 1 : 0,
+        time_to_ms: row.time_to_ms,
+        dwell_ms: Math.round(row.dwell_ms || 0)
+      });
+    });
     return {
       session_id: sid,
       metrika_client_id: metrikaCid,
       clicked_telegram: clickedTelegram ? 1 : 0,
-      bot_started: botStarted ? 1 : 0,
+      bot_started: 0,
       page_ms: Math.max(0, t - startedAt),
       landing_url: location.href,
       referrer: document.referrer || "",
       ...qsUtm(),
-      sections: SECTIONS.map(s => {
-        const row = state[s.key];
-        const live = row._since != null ? Math.max(0, t - row._since) : 0;
-        return {
-          key: s.key,
-          label: s.label,
-          reached: row.reached ? 1 : 0,
-          time_to_ms: row.time_to_ms,
-          dwell_ms: Math.round(row.dwell_ms + live)
-        };
-      })
+      sections
     };
-  }
-
-  function pushMetrikaParams(payload){
-    if (typeof ym !== "function") return;
-    const params = {
-      ad: payload.utm_content || "",
-      campaign: payload.utm_campaign || "",
-      term: payload.utm_term || "",
-      tg_click: payload.clicked_telegram,
-      page_sec: Math.round(payload.page_ms / 1000)
-    };
-    payload.sections.forEach(s => {
-      if (!s.reached) return;
-      params["tt_" + s.key] = Math.round((s.time_to_ms || 0) / 1000);
-      params["dw_" + s.key] = Math.round((s.dwell_ms || 0) / 1000);
-    });
-    ym(YM, "params", params);
   }
 
   function send(force){
@@ -145,10 +148,8 @@ const behavior = (function(){
     const t = now();
     if (!force && t - lastSent < 2500) return;
     lastSent = t;
-    pushMetrikaParams(payload);
     const body = JSON.stringify(payload);
     const url = api("/api/behavior");
-    // fetch надёжнее sendBeacon(application/json) кросс-доменом
     fetch(url, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
@@ -166,14 +167,18 @@ const behavior = (function(){
 
   function markTelegramClick(){
     clickedTelegram = true;
-    ymGoal("tg_click", 30);
     send(true);
   }
 
   function setCid(cid){ metrikaCid = cid || ""; }
 
+  // Страница как секция воронки
+  markExtra("page_" + PAGE_LANDING, "Страница: " + PAGE_LANDING);
+  if (PAGE_LANDING === "vstrecha") {
+    ymGoal("view_vstrecha", 20);
+  }
+
   if ("IntersectionObserver" in window) {
-    // Порог 0.35 ломал высокие секции (max ratio = viewport/высота < 0.35)
     const io = new IntersectionObserver(entries => {
       let changed = false;
       entries.forEach(entry => {
@@ -197,7 +202,6 @@ const behavior = (function(){
       io.observe(el);
     });
   } else {
-    // Fallback: считаем доскролл по положению scroll
     function checkScroll(){
       const vh = window.innerHeight || 800;
       SECTIONS.forEach(s => {
@@ -221,27 +225,41 @@ const behavior = (function(){
   });
   window.addEventListener("pagehide", () => send(true));
   setInterval(() => send(false), 8000);
-  // Первый пинг сразу после загрузки
   setTimeout(() => send(true), 800);
 
-  return {markTelegramClick, setCid, send, snapshot, sid};
+  return {markTelegramClick, setCid, send, snapshot, sid, markExtra};
 })();
 
-async function openBot(e){
-  e.preventDefault();
+async function submitLeadForm(form){
+  const name = (form.querySelector("[name=name]") || {}).value || "";
+  const email = (form.querySelector("[name=email]") || {}).value || "";
+  const phone = (form.querySelector("[name=phone]") || {}).value || "";
+  const errEl = form.querySelector(".lead-error");
+  const btn = form.querySelector("[type=submit]");
+  function showErr(msg){
+    if (errEl) { errEl.textContent = msg; errEl.hidden = false; }
+  }
+  if (errEl) errEl.hidden = true;
+  if ((name || "").trim().length < 2) { showErr("Укажите имя"); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((email || "").trim())) { showErr("Укажите почту"); return; }
+  if (((phone || "").replace(/\D/g, "")).length < 10) { showErr("Укажите телефон"); return; }
+
   const utm = qsUtm();
   const cid = await getClientID();
   behavior.setCid(cid);
   behavior.markTelegramClick();
   const snap = behavior.snapshot();
-  let start = "site";
+  if (btn) { btn.disabled = true; btn.textContent = "Отправляем…"; }
+
+  let botUrl = "https://t.me/" + BOT_USER;
   try {
-    const ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
-    const timer = ctrl ? setTimeout(() => ctrl.abort(), 2000) : null;
-    const r = await fetch(api("/api/intent"), {
+    const r = await fetch(api("/api/leads"), {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({
+        name: name.trim(),
+        email: email.trim(),
+        phone: phone.trim(),
         metrika_client_id: cid,
         session_id: behavior.sid,
         ...utm,
@@ -250,21 +268,34 @@ async function openBot(e){
         page_ms: snap.page_ms,
         sections: snap.sections
       }),
-      signal: ctrl ? ctrl.signal : undefined,
-      keepalive: true
+      keepalive: true,
+      mode: "cors"
     });
-    if (timer) clearTimeout(timer);
-    if (r.ok) {
-      const data = await r.json();
-      if (data.start) start = data.start;
+    const data = await r.json().catch(() => ({}));
+    if (!r.ok) {
+      showErr(data.detail || data.message || "Не удалось отправить. Попробуйте ещё раз.");
+      if (btn) { btn.disabled = false; btn.textContent = "Записаться на встречу"; }
+      return;
     }
-  } catch {}
-  location.href = "https://t.me/" + BOT_USER + "?start=" + encodeURIComponent(start);
+    ymGoal("meeting_lead", 200);
+    if (data.bot_url) botUrl = data.bot_url;
+    else if (data.start) botUrl = "https://t.me/" + BOT_USER + "?start=" + encodeURIComponent(data.start);
+  } catch {
+    showErr("Нет связи с сервером. Проверьте интернет и попробуйте ещё раз.");
+    if (btn) { btn.disabled = false; btn.textContent = "Записаться на встречу"; }
+    return;
+  }
+  location.href = botUrl;
 }
 
-document.querySelectorAll(".js-bot").forEach(el => el.addEventListener("click", openBot));
+document.querySelectorAll("form.js-lead-form").forEach(form => {
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    submitLeadForm(form);
+  });
+});
 
-// Синхронизация цены с бэкендом (даты, счётчики и места не используются)
+// Синхронизация цены с бэкендом
 (function syncPrice(){
   function applyPrice(data){
     if (!data || !data.price_display) return;
@@ -300,42 +331,15 @@ document.addEventListener("yacounter" + YM + "inited", async () => {
   const cid = await getClientID();
   behavior.setCid(cid);
   ym(YM, "userParams", {
-    landing: (window.PAGE_LANDING || "home"),
+    landing: PAGE_LANDING,
     has_yclid: utm.yclid ? "1" : "0",
     utm_source: utm.utm_source || "",
     utm_campaign: utm.utm_campaign || "",
     utm_content: utm.utm_content || "",
     utm_term: utm.utm_term || ""
   });
-  ym(YM, "params", {
-    page: location.pathname,
-    utm_source: utm.utm_source || "",
-    utm_medium: utm.utm_medium || "",
-    utm_campaign: utm.utm_campaign || "",
-    utm_content: utm.utm_content || "",
-    utm_term: utm.utm_term || ""
-  });
   behavior.send(true);
 });
-
-(function watchOffer(){
-  const el = document.getElementById("price");
-  if (!el || !("IntersectionObserver" in window)) return;
-  let sent = false;
-  const io = new IntersectionObserver(entries => {
-    if (sent || !entries.some(x => x.isIntersecting && x.intersectionRatio >= 0.35)) return;
-    sent = true;
-    ymGoal("view_offer", 50);
-    window.dataLayer.push({
-      ecommerce: {
-        currencyCode: "RUB",
-        detail: { products: [{ id: "vs-individual-7", name: "Верни себе себя · индивидуальная программа 7 дней", price: PRICE_RUBLES, quantity: 1 }] }
-      }
-    });
-    io.disconnect();
-  }, {threshold: [0.35]});
-  io.observe(el);
-})();
 
 (function revealOnScroll(){
   const nodes = document.querySelectorAll(".reveal, .stagger");
@@ -354,21 +358,27 @@ document.addEventListener("yacounter" + YM + "inited", async () => {
   nodes.forEach(n => io.observe(n));
 })();
 
-// ---- Интерактив: карточки-перевороты, карта дней, чипы ----
 (function interactions(){
-  // индекс для ступенчатой анимации
   document.querySelectorAll(".stagger").forEach(group => {
     Array.prototype.forEach.call(group.children, (el, i) => el.style.setProperty("--i", i));
   });
 
   const canHover = window.matchMedia && window.matchMedia("(hover:hover)").matches;
 
-  // flip: на touch — тап, с клавиатуры — Enter/Space; на hover-устройствах переворот делает CSS
-  document.querySelectorAll(".flip").forEach(card => {
+  document.querySelectorAll(".flip").forEach((card, idx) => {
+    const cap = card.querySelector(".flip-cap b");
+    const label = (cap && cap.textContent) || ("Карточка " + (idx + 1));
+    const key = "flip_" + (idx + 1);
+
+    function track(){
+      behavior.markExtra(key, "Flip: " + label);
+    }
     function toggle(){
       const open = card.classList.toggle("is-open");
       card.setAttribute("aria-expanded", open ? "true" : "false");
+      if (open) track();
     }
+    card.addEventListener("mouseenter", track);
     card.addEventListener("click", () => { if (!canHover) toggle(); });
     card.addEventListener("keydown", e => {
       if (e.key === "Enter" || e.key === " ") {
@@ -378,7 +388,6 @@ document.addEventListener("yacounter" + YM + "inited", async () => {
     });
   });
 
-  // карта дней: раскрытие карточки
   document.querySelectorAll(".dcard").forEach(card => {
     const btn = card.querySelector(".dbtn");
     if (!btn) return;
@@ -390,7 +399,6 @@ document.addEventListener("yacounter" + YM + "inited", async () => {
     });
   });
 
-  // чипы «Я ленивая…»: тап включает заливку
   document.querySelectorAll(".word").forEach(chip => {
     chip.addEventListener("click", () => {
       const on = chip.classList.toggle("on");
@@ -398,4 +406,3 @@ document.addEventListener("yacounter" + YM + "inited", async () => {
     });
   });
 })();
-

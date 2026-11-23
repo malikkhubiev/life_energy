@@ -156,10 +156,23 @@
     <h2 class="emotion">Готова разобрать свою ситуацию?</h2>
     <p class="fade">Мы подробно обсудим твой запрос, исследуем возможные причины и определим, подходит ли тебе программа.</p>
     <p class="free-note">Участие во встрече бесплатное и ни к чему тебя не обязывает.</p>
-    <div class="cta-row" style="margin-top:34px">
-      <a class="buy pulse js-bot" href="https://t.me/teacher_life_bot?start=site">Записаться на встречу</a>
-      <p class="cta-soft">Программа, если она тебе подойдёт, стоит <span class="js-price-text">65 000 ₽</span>.</p>
-    </div>
+    <form class="lead-form js-lead-form" style="margin-top:34px" novalidate>
+      <label>
+        <span>Имя</span>
+        <input type="text" name="name" autocomplete="name" required placeholder="Как к тебе обращаться">
+      </label>
+      <label>
+        <span>Почта</span>
+        <input type="email" name="email" autocomplete="email" required placeholder="name@example.com">
+      </label>
+      <label>
+        <span>Телефон</span>
+        <input type="tel" name="phone" autocomplete="tel" required placeholder="+7 900 000-00-00">
+      </label>
+      <p class="lead-error" hidden></p>
+      <button class="buy pulse" type="submit">Записаться на встречу</button>
+      <p class="cta-soft">После отправки откроется Telegram-бот с кнопкой оплаты — она понадобится, если после встречи решишь продолжить. Программа стоит <span class="js-price-text">65 000 ₽</span>.</p>
+    </form>
   </div>
 </section>
 
