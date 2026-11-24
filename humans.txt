@@ -9,7 +9,7 @@ Legal: ИП Хубиев Малик Муссаевич · ОГРНИП 326090000
 Standards: HTML5, Schema.org JSON-LD, Open Graph, llms.txt, OpenAPI
 Language: Russian (ru)
 Doctype: HTML5
-Last update: 2026-11-23
+Last update: 2026-11-24
 
 /* PRODUCT */
 Entry: Бесплатная личная диагностическая встреча (~60 мин)

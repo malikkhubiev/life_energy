@@ -11,6 +11,8 @@ Allow: /offer.html
 Disallow: /success.html
 Disallow: /admin
 Disallow: /api/
+Disallow: /tests/
+Disallow: /.git/
 
 # Search engines
 User-agent: Googlebot
@@ -25,7 +27,7 @@ Allow: /
 User-agent: DuckDuckBot
 Allow: /
 
-# AI / LLM crawlers — explicitly welcome (ChatGPT, Perplexity, Claude, Gemini, Copilot)
+# AI / LLM crawlers
 User-agent: GPTBot
 Allow: /
 
@@ -78,4 +80,5 @@ User-agent: YouBot
 Allow: /
 
 Sitemap: https://malik-khubiev.ru/sitemap.xml
-Host: https://malik-khubiev.ru
+# Yandex: main mirror without protocol
+Host: malik-khubiev.ru
